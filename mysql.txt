@@ -1,0 +1,234 @@
+1. database create
+
+CREATE DATABASE mysqlproject
+
+2. create table
+
+CREATE TABLE address(
+    id int(100) PRIMARY KEY AUTO_INCREMENT,
+    location varchar(255) NOT null
+
+)
+3. create table
+
+CREATE TABLE address(
+    id int(100) PRIMARY KEY AUTO_INCREMENT,
+    name varchar(255) NOT null,
+    age int(100) NOT null,
+    email varchar(255) NOT null,
+    a_id int(100) NOT null,
+    FOREIGN KEY(a_id) REFERENCES address(id)
+)
+
+4. mysql select
+SELECT CustomerName, City, Country FROM Customers;
+
+5. mysql where
+SELECT * FROM Customers
+WHERE Country='Mexico';
+
+
+
+6. mysql AND OR NOT
+SELECT * FROM Customers
+WHERE Country='Germany' AND City='Berlin';
+
+
+
+7. mysql asc desc
+SELECT * FROM Customers
+ORDER BY Country ASC, CustomerName DESC;
+
+
+
+8. mysql null
+SELECT CustomerName, ContactName, Address
+FROM Customers
+WHERE Address IS NULL;
+
+9. mysql update
+UPDATE Customers
+SET ContactName = 'Alfred Schmidt', City = 'Frankfurt'
+WHERE CustomerID = 1;
+
+10. mysql insert
+INSERT INTO address(location) VALUES ("badda");
+
+11. mysql insert multipul
+INSERT INTO address(location) VALUES 
+("badda"),
+("badda1"),
+("badda2"),
+("badda3");
+
+
+12. mysql insert multipul and colume
+INSERT INTO address(name, age, email, a-id) VALUES 
+("robin", 30, robin@gmail.com, 1),
+("rakib", 20, rakib@gmail.com, 2),
+("tuhin", 10, tuhin@gmail.com, 3)
+
+13. mysql limit
+SELECT * FROM Customers LIMIT 3;
+
+14. mysql min 
+SELECT MIN(Price) AS SmallestPrice
+FROM Products;
+
+
+15. mysql max
+SELECT MAX(Price) AS LargestPrice
+FROM Products;
+
+16. mysql count
+SELECT COUNT(ProductID)
+FROM Products;
+
+17. mysql avg
+SELECT AVG(Price)
+FROM Products;
+
+18. mysql like a%o
+SELECT * FROM Customers
+WHERE ContactName LIKE 'a%o';
+
+19. mysql like a%
+SELECT * FROM Customers
+WHERE CustomerName NOT LIKE 'a%';
+
+20. mysql like %a
+SELECT * FROM Customers
+WHERE CustomerName LIKE '%a';
+
+
+21. mysql like %a
+SELECT * FROM Customers
+WHERE CustomerName LIKE '%or%';
+
+
+22. mysql in
+SELECT * FROM Customers
+WHERE Country IN ('Germany', 'France', 'UK');
+
+
+23. mysql not in
+SELECT * FROM Customers
+WHERE Country NOT IN ('Germany', 'France', 'UK');
+
+24. mysql 
+SELECT * FROM Customers
+WHERE Country IN (SELECT Country FROM Suppliers);
+
+25. mysql not between
+SELECT * FROM Products
+WHERE Price NOT BETWEEN 10 AND 20;
+
+
+26. mysql price between
+SELECT * FROM Products
+WHERE Price BETWEEN 10 AND 20
+AND CategoryID NOT IN (1,2,3);
+
+
+27. mysql aliases id
+SELECT CustomerID AS ID, CustomerName AS Customer
+FROM Customers;
+
+28.mysql aliases name
+SELECT CustomerName AS Customer, ContactName AS "Contact Person"
+FROM Customers;
+
+
+29.mysql aliases
+SELECT * FROM address, students WHERE address.id = students.a_id
+
+
+30.mysql joins
+SELECT Orders.OrderID, Customers.CustomerName, Orders.OrderDate
+FROM Orders
+INNER JOIN Customers
+ON Orders.CustomerID=Customers.CustomerID;
+
+
+
+32.mysql aliases
+SELECT students.name, students.age, students.email, address.location FROM address, students WHERE address.id = students.a_id;
+
+34.mysql inner join table1 + table2
+SELECT column_name(s)
+FROM table1
+INNER JOIN table2
+ON table1.column_name = table2.column_name;
+
+
+36.mysql inner join left table2
+SELECT column_name(s)
+FROM table1
+LEFT JOIN table2
+ON table1.column_name = table2.column_name;
+
+
+38.mysql not null
+CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255) NOT NULL,
+    Age int
+);
+
+40.mysql unique
+CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    UNIQUE (ID)
+);
+
+42.mysql unique CONSTRAINT
+CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    CONSTRAINT UC_Person UNIQUE (ID,LastName)
+);
+44.mysql  PRIMARY KEY
+CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    PRIMARY KEY (ID)
+);
+
+46.mysql  PRIMARY KEY
+CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    CONSTRAINT PK_Person PRIMARY KEY (ID,LastName)
+);
+
+
+48.mysql   FOREIGN KEY
+CREATE TABLE Orders (
+    OrderID int NOT NULL,
+    OrderNumber int NOT NULL,
+    PersonID int,
+    PRIMARY KEY (OrderID),
+    FOREIGN KEY (PersonID) REFERENCES Persons(PersonID)
+);
+
+
+49.mysql  AUTO_INCREMENT
+CREATE TABLE Persons (
+    Personid int NOT NULL AUTO_INCREMENT,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    PRIMARY KEY (Personid)
+);
+50.mysql date
+SELECT * FROM Orders WHERE OrderDate='2008-11-11'
